@@ -1,39 +1,31 @@
 {
-  "name": "react-example",
+  "name": "safereplay-monorepo",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "description": "SafeReplay - Privacy-Preserving AI-Assisted Web Debugging Platform",
+  "workspaces": [
+    "shared",
+    "replay-sdk",
+    "server",
+    "demo-app",
+    "dashboard"
+  ],
   "scripts": {
-    "dev": "tsx server.ts",
-    "build": "vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
-    "start": "node dist/server.cjs",
-    "preview": "vite preview",
-    "clean": "rm -rf dist server.js",
-    "lint": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@google/genai": "^2.4.0",
-    "@tailwindcss/vite": "^4.3.3",
-    "@vitejs/plugin-react": "^6.1.1",
-    "dotenv": "^17.2.3",
-    "express": "^4.21.2",
-    "lucide-react": "^0.546.0",
-    "mammoth": "^1.12.3",
-    "motion": "^12.23.24",
-    "pdf-parse": "^2.4.5",
-    "react": "^19.0.1",
-    "react-dom": "^19.0.1",
-    "vite": "^8.3.0"
+    "dev": "npm run dev --workspaces",
+    "dev:server": "npm run dev --workspace=server",
+    "dev:demo": "npm run dev --workspace=demo-app",
+    "dev:dashboard": "npm run dev --workspace=dashboard",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "test:shared": "npm run test --workspace=shared",
+    "test:sdk": "npm run test --workspace=replay-sdk",
+    "test:server": "npm run test --workspace=server",
+    "test:demo": "npm run test --workspace=demo-app",
+    "test:dashboard": "npm run test --workspace=dashboard",
+    "test:e2e": "vitest run tests/e2e.test.ts",
+    "lint": "npm run lint --workspaces"
   },
   "devDependencies": {
-    "@types/express": "^4.17.21",
-    "@types/node": "^22.14.0",
-    "@types/react": "^19.3.0",
-    "@types/react-dom": "^19.3.0",
-    "autoprefixer": "^10.4.21",
-    "esbuild": "^0.28.0",
-    "tailwindcss": "^4.3.3",
-    "tsx": "^4.21.0",
-    "typescript": "^7.0.2"
+    "typescript": "^5.4.5"
   }
 }

@@ -1,233 +1,116 @@
-<div align="center">
+# SafeReplay — Privacy-Preserving AI-Assisted Web Debugging Platform
 
-<img src="./public/cognifix-banner.jpg" alt="CogniFix AI Adaptive STEM Tutor Banner" width="100%" style="border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);" />
+> **“Reproduce the bug. Protect user privacy. Verify the fix.”**
 
-# 🧠 CogniFix
-
-### *"Fixing the Misconception, Not Just the Mistake."*
-
-[![Live Demo](https://img.shields.io/badge/Live_Demo-cognifix.onrender.com-006096?style=for-the-badge&logo=render&logoColor=white)](https://cognifix.onrender.com/)
-[![React 19](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Groq API](https://img.shields.io/badge/Groq_API-Ultra_Fast_LLM-F55036?style=for-the-badge&logo=fastapi&logoColor=white)](https://groq.com/)
-[![Supabase](https://img.shields.io/badge/Supabase-Auth_%26_PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
-[![DuckDuckGo](https://img.shields.io/badge/DuckDuckGo-Live_Search-DE5833?style=for-the-badge&logo=duckduckgo&logoColor=white)](https://duckduckgo.com/)
+SafeReplay is an end-to-end web debugging platform that connects user actions, DOM session replay, API requests, atomic database transactions, runtime errors, source-code inspection, AI root-cause analysis, and sandbox fix verification.
 
 ---
 
-**CogniFix** is a next-generation AI-powered adaptive STEM tutor that diagnoses the underlying cognitive trap behind a student's wrong answer rather than simply marking it incorrect. By combining a multi-agent AI architecture, live DuckDuckGo internet grounding, and continuous diagnostic mastery tracking, CogniFix repairs foundational thinking flaws and fosters genuine conceptual mastery.
+## 🌟 Key Features
 
-🚀 **[Experience the Live Web Application &rarr;](https://cognifix.onrender.com/)**
+1. **🛡️ 100% Pre-Upload Privacy Engine**:
+   - Zero personal data or tokens ever leave the user's browser.
+   - Input and textarea fields automatically masked (`[MASKED]`, `***`).
+   - Block private areas via `[data-private]` and `[data-replay-block]`.
+   - Headers and query parameters stripped of auth tokens, keys, and cookies.
+   - Verified Privacy Report generated with `sensitiveValuesUploaded: 0`.
+
+2. **🛍️ Interactive Shopping Demo App (`http://localhost:3000`)**:
+   - Polished e-commerce store with synthetic hardware catalogue.
+   - Cart calculations (subtotal, shipping rules, taxes).
+   - Synthetic checkout submission triggering a controlled database rollback at `CustomerDetailsService.ts:48`.
+
+3. **📊 Developer Studio & Replay Dashboard (`http://localhost:3001`)**:
+   - **Chronological Timeline Player**: Play, Pause, Speed control (1x, 2x, 4x), Jump to Error.
+   - **Visual State Replay**: Interactive reproduction of the user journey with masked inputs.
+   - **Network & Database Inspector**: Intercepted HTTP status codes and database transaction rollback causes.
+   - **Source Code Viewer**: Allowlist-guarded file inspector highlighting faulty Line 48 in red.
+   - **AI Root-Cause Diagnosis**: Context-aware AI explanation with confidence score and review warnings.
+   - **Fix Verification Runner**: Sandbox test execution validating that the corrected code resolves the error (`"Passed for the captured reproduction scenario."`).
 
 ---
 
-</div>
-
-## 👥 Team Xeno
-
-Developed with passion by **Team Xeno**:
-
-| Member | Role & Contributions |
-| :--- | :--- |
-| **Subhash B** | System Architecture, Multi-Agent Engine, Full-Stack Development |
-| **Ezhilkumaran K** | Adaptive Diagnostics, Knowledge Graph & Mind Map Engineering |
-| **Sandhya Rani Y** | UI/UX Design, Supabase Database & Security Policies |
-
----
-
-## 🎯 The Core Problem & The CogniFix Solution
+## 🏗️ Monorepo Architecture
 
 ```
-❌ Traditional Quiz / LMS Systems:
-   Student Question ──▶ Wrong Answer ──▶ "Incorrect (Score: 0/1)" ──▶ Correct Answer Shown
-   [The underlying reasoning misconception remains undetected and repeats in the exam]
-
-✅ CogniFix Adaptive Approach:
-   Student Question ──▶ Wrong Answer ──▶ 🧠 Root Misconception Diagnosis Agent
-                                                │
-                                                ▼
-   Verified Remediation Problem ◀── DuckDuckGo Search Grounding ◀── Cognitive Trap Flagged
-         │
-         ▼
-   Track Mastery & Progression ──▶ Spaced Repetition Flashcards ──▶ Adaptive Roadmap
+safereplay/
+├── shared/          # Shared Zod schemas & TypeScript data contracts
+├── replay-sdk/      # Privacy-preserving browser capture & masking SDK
+├── demo-app/        # React + Vite shopping store application
+├── dashboard/       # Developer debugging dashboard & timeline studio
+├── server/          # Node.js + Express backend with database and AI providers
+├── database/        # Migrations & seed data
+├── docs/            # Architecture, privacy, demo scenario & API specs
+├── docker-compose.yml
+└── package.json
 ```
 
-Traditional test engines treat mistakes as binary outcomes (0 or 1). **CogniFix treats wrong answers as diagnostic goldmines.** Every incorrect answer reflects a specific cognitive defect—such as confusing asymptotic limit dominance, misapplying the spectral theorem, or confusing variable scopes. CogniFix pinpoints the exact trap, validates it with live web resources, and immediately provides a scaffolded remediation path.
-
 ---
 
-## ✨ Key Features
-
-### 1. 🔍 Root Misconception Diagnosis
-- Parses student responses in real time across mathematics, physics, computer science, and engineering.
-- Identifies the cognitive reasoning trap (e.g. *Arithmetic Invariance on Infinity*, *Geometric Degeneracy Bias*).
-- Provides Socratic hints that guide the learner toward self-correction without spoiling the solution.
-
-### 2. ⚡ Fresh Targeted Remediation Generation
-- Automatically synthesizes a brand-new practice problem directly attacking the identified misconception.
-- Verifies the mathematical rigor, theorem domain, and step-by-step logic before serving the question to the learner.
-
-### 3. 🗺️ Adaptive Skill Roadmaps with Live DuckDuckGo Grounding
-- **Interactive Skill Search**: Enter any skill or target goal (e.g., *"Python upto DSA"*).
-- **Chunked Milestones**: Decomposes the skill into structured, sequential chunks:
-  - *Basic Programming & Syntax* &rarr; *Idiomatic Python* &rarr; *OOP Principles* &rarr; *Linear Data Structures* &rarr; *Algorithms & Big-O* &rarr; *DSA Mastery*.
-- **DuckDuckGo Live Web Search**: Queries the live internet in real time to fetch:
-  - 🎥 **Video Tutorials**: Verified YouTube playlists and walkthrough lessons (`site:youtube.com`).
-  - 📄 **Documentation & Cheatsheets**: Official guides, documentation, and tutorials.
-  - 💻 **Practice Platforms**: Direct links to LeetCode and HackerRank problem sets.
-- **Resource Completion Tracking**: Check off individual videos, docs, and practice exercises as finished.
-- **Dedicated Roadmap History**: Review, switch between, and manage multiple roadmaps with persisted completion progress.
-
-### 4. 🗂️ Spaced Retrieval Flashcards
-- High-yield spaced retention flashcards targeting student vulnerabilities.
-- Tracks decay levels (*Critical*, *Stable*, *Optimal*) and scheduled reviews.
-
-### 5. 🕸️ Interactive Knowledge Mind Map
-- Visual hierarchical dependency graph showing prerequisite chains and concepts.
-- Flags nodes as *Mastered*, *Vulnerable*, or *Unlocked* to guide study sessions.
-
-### 6. 📄 Multimodal Student Work Upload
-- Supports uploads of student worksheets in **PDF**, **DOCX**, **JPG**, **PNG**, and **WEBP** (up to 30 MB).
-- Server extracts document text and leverages vision models to diagnose handwritten or printed homework errors.
-
-### 7. 👨‍🏫 Teacher Portal & Class Analytics
-- Class-wide analytics displaying average mastery rates, active trap frequency, and student rosters.
-- Enables educators to adapt classroom teaching to real-time cognitive blindspots.
-
----
-
-## 🏗️ Multi-Agent System Architecture
-
-CogniFix employs a specialized multi-agent pipeline where individual agents focus on distinct educational responsibilities:
-
-```
-                                  ┌─────────────────────────────┐
-                                  │      Client (React 19)      │
-                                  └──────────────┬──────────────┘
-                                                 │
-                                                 ▼
-                                  ┌─────────────────────────────┐
-                                  │   Express / Vite Backend    │
-                                  └──────────────┬──────────────┘
-                                                 │
-         ┌───────────────────┬───────────────────┼───────────────────┬───────────────────┐
-         │                   │                   │                   │                   │
-         ▼                   ▼                   ▼                   ▼                   ▼
-┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
-│ Diagnoser Agent │ │ Generator Agent │ │ Explainer Agent │ │  Roadmap Agent  │ │ Document Agent  │
-│  (Groq/Gemini)  │ │  (Groq/Gemini)  │ │  (Groq/Gemini)  │ │  (Groq + DDG)   │ │ (Vision / OCR)  │
-└─────────────────┘ └─────────────────┘ └─────────────────┘ └─────────────────┘ └─────────────────┘
-         │                   │                   │                   │                   │
-         └───────────────────┴───────────────────┼───────────────────┴───────────────────┘
-                                                 │
-                                  ┌──────────────┴──────────────┐
-                                  │   Supabase Cloud Platform   │
-                                  │ ┌─────────────────────────┐ │
-                                  │ │ PostgreSQL + RLS Data   │ │
-                                  │ │ Google OAuth Sessions   │ │
-                                  │ │ Private Storage Bucket  │ │
-                                  │ └─────────────────────────┘ │
-                                  └─────────────────────────────┘
-```
-
-- **Diagnoser Agent**: Evaluates student choices and determines the cognitive trap.
-- **Generator Agent**: Formulates novel, mathematically sound remediation questions.
-- **Explainer Agent**: Produces step-by-step Socratic walkthroughs and theoretical proofs.
-- **Roadmap Agent**: Breaks down curricula into progressive milestones and leverages DuckDuckGo for live internet video, doc, and practice grounding.
-- **Document Agent**: Extracts text and analyzes uploaded PDF/Word/Image homework assignments.
-
----
-
-## 🛠️ Tech Stack
-
-- **Frontend**: React 19, TypeScript, Vite, Tailwind CSS 4, Lucide React, Motion
-- **Backend**: Node.js, Express, TypeScript (`tsx`), Mammoth (DOCX), PDF-Parse (PDF)
-- **AI Engines**:
-  - [Groq API](https://groq.com/) (Dedicated API keys per agent for high-throughput, low-latency LLM inference)
-  - Google Gemini 3.8 Flash (`@google/genai`) as high-reliability fallback
-- **Search & Grounding**: DuckDuckGo Live Web Search Engine (HTML organic extractor & Instant Answers)
-- **Database & Auth**: [Supabase](https://supabase.com/) (PostgreSQL with Row Level Security, Storage Buckets, OAuth)
-- **Hosting & Deployment**: [Render](https://render.com/)
-
----
-
-## 🚀 Getting Started
+## 🚀 Quick Start Guide
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) (v18 or higher recommended)
-- `npm` or `yarn`
+- Node.js v18+ (tested on Node v20/v24)
+- npm v9+
 
-### 1. Clone the Repository
+### 1. Install Dependencies
 ```bash
-git clone https://github.com/subhashdoc234xyz/cognifix.git
-cd cognifix
+npm install --ignore-scripts
 ```
 
-### 2. Install Dependencies
-```bash
-npm install
-```
-
-### 3. Configure Environment Variables
+### 2. Environment Configuration (Optional)
 Copy `.env.example` to `.env`:
 ```bash
 cp .env.example .env
 ```
+*(By default, SafeReplay works out-of-the-box using the built-in Mock database and Mock AI analyzer without requiring any API keys or external services).*
 
-Edit `.env` with your API credentials:
-```env
-# Groq Dedicated Agent Keys (Recommended)
-GROQ_API_KEY=your_groq_api_key
-GROQ_DIAGNOSER_API_KEY=your_key
-GROQ_GENERATOR_API_KEY=your_key
-GROQ_EXPLAINER_API_KEY=your_key
-GROQ_ROADMAP_API_KEY=your_key
-GROQ_DOCUMENT_API_KEY=your_key
-GROQ_MODEL=openai/gpt-oss-120b
+### 3. Start Development Servers
+Run the full stack concurrently:
+- **Backend API**: `npm run dev:server` (Port `5000`)
+- **Demo Store**: `npm run dev:demo` (Port `3000`)
+- **Developer Dashboard**: `npm run dev:dashboard` (Port `3001`)
 
-# Google Gemini API (Optional Fallback)
-GEMINI_API_KEY=your_gemini_api_key
-
-# Supabase (Optional for cloud sync and document uploads)
-SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_ANON_KEY=your_anon_key
-SUPABASE_SECRET_KEY=your_service_or_secret_key
-```
-
-### 4. Run Development Server
+Or start all services via:
 ```bash
 npm run dev
 ```
-Open your browser at `http://localhost:3000` to start using CogniFix!
 
-### 5. Build for Production
+---
+
+## 🧪 Testing
+
+Run all automated test suites across all workspaces:
 ```bash
-npm run build
-npm start
+npm run test
+```
+
+Workspace-specific test commands:
+```bash
+npm run test:shared      # Shared schema validation
+npm run test:sdk         # Privacy masking & SDK engine
+npm run test:server      # Backend routes, database & AI analysis
+npm run test:demo        # Demo app calculations & validations
+npm run test:dashboard   # Dashboard logic & compliance
 ```
 
 ---
 
-## 🔐 Supabase Database Setup
+## 👥 Team Member Ownership
 
-CogniFix includes battle-tested PostgreSQL schemas with complete Row-Level Security (RLS) policies:
-
-1. Open your **Supabase Dashboard &rarr; SQL Editor**.
-2. Run [`supabase-schema.sql`](./supabase-schema.sql) to generate profiles, mastery tracking, quiz history, mind maps, and roadmaps tables.
-3. Run [`supabase-wrong-answer-uploads.sql`](./supabase-wrong-answer-uploads.sql) to provision the private storage bucket and upload metadata table.
-
----
-
-## 🌐 Live Deployment
-
-CogniFix is continuously deployed on Render:
-🔗 **[https://cognifix.onrender.com/](https://cognifix.onrender.com/)**
+| Member | Branch | Scope |
+| :--- | :--- | :--- |
+| **Member 1** | `feature/demo-app-db` | `demo-app/`, database migrations, checkout & customer details API |
+| **Member 2** | `feature/replay-sdk-privacy` | `replay-sdk/`, privacy masking engine, browser observers, safe fetch wrapper |
+| **Member 3** | `feature/dashboard-ai` | `dashboard/`, `server/src/ai/`, sessions & AI analysis routes |
 
 ---
 
-<div align="center">
+## 📚 Documentation Links
 
-Made with 💙 by **Team Xeno**  
-*Subhash B • Ezhilkumaran K • Sandhya Rani Y*
-
-</div>
+- [System Architecture](file:///f:/REPLAY/docs/architecture.md)
+- [Controlled Demo Scenario](file:///f:/REPLAY/docs/demo-scenario.md)
+- [Privacy Engine Specification](file:///f:/REPLAY/docs/privacy.md)
+- [API Reference](file:///f:/REPLAY/docs/api.md)
+- [Team Ownership & Git Workflow](file:///f:/REPLAY/docs/team-workflow.md)
+- [Final Verification Report](file:///f:/REPLAY/docs/final-verification.md)
